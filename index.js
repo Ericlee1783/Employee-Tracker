@@ -48,7 +48,7 @@ function mainScreen() {
         case "Add Employee":
           addEmployee();
           break;
-          // case 'Update Employee Role': updateEmployee();
+          case 'Update Employee Role': updateEmployee();
           break;
         case "View All Roles":
           viewRoles();

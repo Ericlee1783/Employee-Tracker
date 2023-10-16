@@ -24,20 +24,22 @@ const viewEmployees = () => {
     // console.log(results);
     console.table(results);
   });
+  // how to prompt the screen to go back to main?
   // mainScreen();
 };
+//function to add an employee
 const addEmployee = () => {
   inquirer
     .prompt([
       {
         type: "input",
         message: "What's the first name of the employee?",
-        name: "eeFirstName"
+        name: "FirstName"
       },
       {
         type: "input",
         message: "What's the last name of the employee?",
-        name: "eeLastName"
+        name: "LastName"
       },
       {
         type: "input",
@@ -53,10 +55,11 @@ const addEmployee = () => {
     .then(function(answer) {
       const sql = "INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)"
       const final = "SELECT * FROM employees"
-      db.query(sql, [answer.eeFirstName, answer.eeLastName, answer.roleID, answer.managerID], function(err, res) {
+      //inserts the new employee into the table and displays it
+      db.query(sql, [answer.FirstName, answer.LastName, answer.roleID, answer.managerID], function(err, res) {
         if (err) throw err;
         console.table(res);
-
+        //shows the final result after the insertion
         db.query(final, (err, res) => {
          if (err) {
             res.status(500).json({ error: err.message });
@@ -65,7 +68,6 @@ const addEmployee = () => {
           console.table(res);
        })
         //how to return to main screen?
-        //how to display finished table?
         // mainScreen();
       });
     });
@@ -81,7 +83,7 @@ const viewRoles = () => {
     console.table(results);
   });
 };
-//function to view all departments?
+//function to add a role
 const addRole = () => {
   inquirer
     .prompt([
@@ -121,6 +123,7 @@ const addRole = () => {
       );
     });
 };
+//function to view all departments
 const viewDepts = () => {
   const sql = `SELECT * FROM departments`;
   db.query(sql, (err, results) => {
@@ -161,20 +164,27 @@ const addDept = () => {
 
 //function to update employee
 const updateEmployee = () => {
-  const sql = `
-    UPDATE
-    SET
-    WHERE
-    `;
-
+    inquirer
+      .prompt([
+        {
+          type: 'list',
+          message: 'Which employee would you like to update?',
+          name: 'eeUpdate',
+          choices: [viewEmployees()]
+        }
+      ])
+  }
+  const sql = `SELECT * FROM employees`
   db.query(sql, (err, results) => {
     if (err) {
       res.status(500).json({ error: err.message });
       return;
     }
-    console.log(results);
-  });
-};
+    console.table(results);
+  })
+  //function to prompt which employee after displaying the table?
+  
+
 
 module.exports = {
   viewDepts,
