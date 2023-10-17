@@ -7,4 +7,5 @@ This employee tracker only uses the terminal to prompt the user questions about 
 ![Alt text](image.png)
 
 ## Installation
-please run the command: npm i to install all the necessary packages needed to run this application!
+Please run the command: npm i to install all the necessary packages needed to run this application!
+https://drive.google.com/file/d/1CCNT0l9rpDO2E3iJs3mYKSrh71_vJvA-/view 
